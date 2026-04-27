@@ -15,7 +15,7 @@ module.exports = function (api) {
   ];
 
   return {
-    plugins: ['@babel/plugin-proposal-nullish-coalescing-operator'],
+    plugins: ['@babel/plugin-transform-nullish-coalescing-operator'],
     presets,
     sourceMaps: true,
     retainLines: true,

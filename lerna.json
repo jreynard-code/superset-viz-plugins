@@ -3,7 +3,7 @@
   "packages": [
     "plugins/*"
   ],
-  "useWorkspaces": true,
+  "useNx": false,
   "version": "independent",
   "ignoreChanges": [
     "**/*.md",

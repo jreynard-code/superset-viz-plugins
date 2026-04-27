@@ -7,7 +7,7 @@ const babelLoader = {
     // disable gzip compression for cache files
     // faster when there are millions of small files
     cacheCompression: false,
-    plugins: ['@babel/plugin-proposal-nullish-coalescing-operator'],
+    plugins: ['@babel/plugin-transform-nullish-coalescing-operator'],
   },
 };
 module.exports = {
