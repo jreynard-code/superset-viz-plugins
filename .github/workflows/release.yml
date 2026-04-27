@@ -80,7 +80,7 @@ jobs:
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         PLUGINS_EXTRA_FILENAME: 'setupPluginsExtra.ts'
 
-    - name: build & push docker
+    - name: build & push docker of superset
       shell: bash
       env:
         DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USERNAME }}
