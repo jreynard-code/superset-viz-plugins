@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SUPERSET_CHECKOUT_BRANCH: '5.0.0'
-      PRESET_NAME: Jreynard
+      PRESET_NAME: TestPreset
       PROJECT_WORKING_DIRECTORY: superset-viz-plugins
       REPOSITORY_OWNER: jreynard-code
     steps:
