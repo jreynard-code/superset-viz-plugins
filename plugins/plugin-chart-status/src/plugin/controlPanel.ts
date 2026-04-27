@@ -18,7 +18,6 @@
  */
 import { t, validateNonEmpty } from '@superset-ui/core';
 import { ControlPanelConfig, SharedControlConfig, sharedControls } from '@superset-ui/chart-controls';
-import { ColumnMeta, SelectControlConfig } from '@superset-ui/chart-controls/lib/types';
 import { NUMBER_OF_COLORS } from '../types';
 
 const objectColumn: { name: string; config: typeof sharedControls.groupby } = {

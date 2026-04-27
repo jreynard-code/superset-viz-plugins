@@ -18,10 +18,14 @@
  */
 import React from 'react';
 import { ChartProps, supersetTheme, ThemeProvider } from '@superset-ui/core';
-import ComposedChart from '../../plugins/plugin-chart-composed/src/components/ComposedChart';
-import { BarChartSubType, ChartType, SortingType } from '../../plugins/plugin-chart-composed/src/components/types';
-import transformProps from '../../plugins/plugin-chart-composed/src/plugin/transformProps';
-import { barsHorizontalSorted } from '../../plugins/plugin-chart-composed/test/__mocks__/composedProps';
+import ComposedChart from '@superset-viz-plugins/plugin-chart-composed/src/components/ComposedChart';
+import {
+  BarChartSubType,
+  ChartType,
+  SortingType,
+} from '@superset-viz-plugins/plugin-chart-composed/src/components/types';
+import transformProps from '@superset-viz-plugins/plugin-chart-composed/src/plugin/transformProps';
+import { barsHorizontalSorted } from '@superset-viz-plugins/plugin-chart-composed/test/__mocks__/composedProps';
 import { applyCommonLogic, commonConfig } from './utils';
 
 const commonProps = {
@@ -38,7 +42,7 @@ export default {
   ...commonConfig,
 };
 
-const SortedBarsTemplate = args => {
+function SortedBarsTemplate(args) {
   if (args.chartSubType !== BarChartSubType.default && args.chartSubType !== BarChartSubType.stacked) {
     return (
       <>
@@ -54,14 +58,14 @@ const SortedBarsTemplate = args => {
         <ComposedChart
           {...applyCommonLogic(args)}
           data={
-            transformProps(({
+            transformProps({
               ...barsHorizontalSorted,
               formData: {
                 ...barsHorizontalSorted.formData,
                 orderByTypeMetric0: SortingType.asc,
               },
               queriesData: args.queriesData,
-            } as unknown) as ChartProps).data
+            } as unknown as ChartProps).data
           }
           yColumnsMeta={undefined}
           barChart={{
@@ -73,14 +77,14 @@ const SortedBarsTemplate = args => {
         <ComposedChart
           {...applyCommonLogic(args)}
           data={
-            transformProps(({
+            transformProps({
               ...barsHorizontalSorted,
               formData: {
                 ...barsHorizontalSorted.formData,
                 orderByTypeMetric0: SortingType.desc,
               },
               queriesData: args.queriesData,
-            } as unknown) as ChartProps).data
+            } as unknown as ChartProps).data
           }
           chartType={ChartType.barChart}
           chartSubType={BarChartSubType.stacked}
@@ -92,11 +96,11 @@ const SortedBarsTemplate = args => {
       </div>
     </ThemeProvider>
   );
-};
+}
 
 export const SortedBars = SortedBarsTemplate.bind({});
 SortedBars.args = {
-  ...transformProps(({ ...barsHorizontalSorted } as unknown) as ChartProps),
+  ...transformProps({ ...barsHorizontalSorted } as unknown as ChartProps),
   ...commonProps,
   queriesData: barsHorizontalSorted.queriesData,
   chartSubType: BarChartSubType.stacked,

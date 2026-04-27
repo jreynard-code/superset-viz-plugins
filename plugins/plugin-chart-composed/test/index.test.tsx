@@ -145,7 +145,7 @@ describe('plugin-chart-composed', () => {
   });
 
   describe('processNumbers', () => {
-    const mockData = ([
+    const mockData = [
       { metric: -0.1114 },
       { metric: -0.1115 },
       { metric: -0.1116 },
@@ -160,10 +160,10 @@ describe('plugin-chart-composed', () => {
       { metric: 123 },
       { metric: 123456 },
       { metric: 123456789 },
-      { metric: 1234567891011121314151617181920 },
-    ] as unknown) as ResultData[];
+      { metric: 1.2345678910111213e30 },
+    ] as unknown as ResultData[];
     it('non-adaptive', () => {
-      expect(processNumbers(([{ metric: 123 }] as unknown) as ResultData[], ['metric'], 'SOME_FORMAT', 3)).toEqual([
+      expect(processNumbers([{ metric: 123 }] as unknown as ResultData[], ['metric'], 'SOME_FORMAT', 3)).toEqual([
         { metric: 123 },
       ]);
     });

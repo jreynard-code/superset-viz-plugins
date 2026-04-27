@@ -18,10 +18,10 @@
  */
 import React from 'react';
 import { ChartProps, supersetTheme, ThemeProvider } from '@superset-ui/core';
-import PieChart from '../../plugins/plugin-chart-pie/src/PieChart';
-import { LabelTypes } from '../../plugins/plugin-chart-pie/src/utils';
-import transformProps from '../../plugins/plugin-chart-pie/src/plugin/transformProps';
-import { legendTopPercentage } from '../../plugins/plugin-chart-pie/test/__mocks__/pieProps';
+import PieChart from '@superset-viz-plugins/plugin-chart-pie/src/PieChart';
+import { LabelTypes } from '@superset-viz-plugins/plugin-chart-pie/src/utils';
+import transformProps from '@superset-viz-plugins/plugin-chart-pie/src/plugin/transformProps';
+import { legendTopPercentage } from '@superset-viz-plugins/plugin-chart-pie/test/__mocks__/pieProps';
 import { extractTransformProps } from '../utils';
 
 export default {
@@ -47,34 +47,38 @@ export default {
   },
 };
 
-const DefaultTemplate = args => (
-  <ThemeProvider theme={supersetTheme}>
-    <PieChart {...extractTransformProps({ args, props: legendTopPercentage, transformProps })} />
-  </ThemeProvider>
-);
+function DefaultTemplate(args) {
+  return (
+    <ThemeProvider theme={supersetTheme}>
+      <PieChart {...extractTransformProps({ args, props: legendTopPercentage, transformProps })} />
+    </ThemeProvider>
+  );
+}
 
-const DonutTemplate = args => (
-  <ThemeProvider theme={supersetTheme}>
-    <PieChart
-      {...extractTransformProps({ args, props: legendTopPercentage, transformProps, formData: { isDonut: true } })}
-    />
-  </ThemeProvider>
-);
+function DonutTemplate(args) {
+  return (
+    <ThemeProvider theme={supersetTheme}>
+      <PieChart
+        {...extractTransformProps({ args, props: legendTopPercentage, transformProps, formData: { isDonut: true } })}
+      />
+    </ThemeProvider>
+  );
+}
 
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-  ...transformProps((legendTopPercentage as unknown) as ChartProps),
+  ...transformProps(legendTopPercentage as unknown as ChartProps),
   queriesData: legendTopPercentage.queriesData,
 };
 
 export const Donut = DonutTemplate.bind({});
 Donut.args = {
-  ...transformProps(({
+  ...transformProps({
     ...legendTopPercentage,
     formData: {
       ...legendTopPercentage.formData,
       isDonut: true,
     },
-  } as unknown) as ChartProps),
+  } as unknown as ChartProps),
   queriesData: legendTopPercentage.queriesData,
 };

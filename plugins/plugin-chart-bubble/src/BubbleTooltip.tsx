@@ -17,7 +17,7 @@
  * under the License.
  */
 import React, { FC } from 'react';
-import { CategoricalColorNamespace, getNumberFormatter, styled } from '@superset-ui/core';
+import { getNumberFormatter, styled } from '@superset-ui/core';
 import { TooltipProps } from 'recharts';
 
 const Container = styled.div`
@@ -42,7 +42,7 @@ type BubbleChartTooltipProps = TooltipProps & {
   xAxis: string;
   yAxis: string;
   zAxis: string;
-  colorFn: Function;
+  colorFn: (...args: unknown[]) => unknown;
 };
 
 const BubbleTooltip: FC<BubbleChartTooltipProps> = ({

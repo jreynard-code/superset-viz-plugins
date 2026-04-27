@@ -203,7 +203,7 @@ export const processBarChartOrder = (
       );
       // Sorting bars according order
       const sortSign = yColumnSortingType === SortingType.asc ? 1 : -1;
-      tempSortedArray.sort((a, b) => sortSign * (a?.value - b?.value));
+      tempSortedArray.sort((a, b) => sortSign * ((a?.value ?? 0) - (b?.value ?? 0)));
       return fillBarsDataByOrder(
         breakdowns,
         sortedData,
@@ -217,7 +217,7 @@ export const processBarChartOrder = (
   return resultData;
 };
 
-export function debounce(func: Function, timeout = 300) {
+export function debounce(func: (...args: unknown[]) => unknown, timeout = 300) {
   let timer: number;
   return (...args: any[]) => {
     clearTimeout(timer);
@@ -237,6 +237,7 @@ export const getBreakdownsOnly = (breakdown = '') => {
   return [items[0]];
 };
 
+// eslint-disable-next-line default-param-last
 export const getResultColor = (breakdown = '', colorSchemes: ColorSchemes, resultColors: JsonObject) => {
   const currentMetric = getMetricFromBreakdown(breakdown);
   let resultColorScheme = colorSchemes.metric?.[currentMetric];
@@ -288,11 +289,12 @@ export const processNumbers = (
   return resultData;
 };
 
+// eslint-disable-next-line default-param-last
 export const addRechartsKeyAndGetXColumnValues = (
   data: Data[],
   xColumnValues: string[],
   hasTimeSeries?: boolean,
-  xColumns: string[] = [],
+  xColumns: string[] = [], // eslint-disable-line default-param-last
   hiddenTickLabels?: HiddenTickLabels,
 ) =>
   data.map(item => {

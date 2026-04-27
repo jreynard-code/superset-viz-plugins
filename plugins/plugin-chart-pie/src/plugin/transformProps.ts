@@ -36,17 +36,8 @@ type FormData<G extends string, DK extends string> = {
 
 export default function transformProps<G extends string, DK extends string>(chartProps: ChartProps): PieProps<G, DK> {
   const { width, height, formData, queriesData } = chartProps;
-  const {
-    colorScheme,
-    isDonut,
-    groupby,
-    metric,
-    colorPicker,
-    showLegend,
-    labelType,
-    showLabels,
-    legendPosition,
-  } = formData as FormData<G, DK>;
+  const { colorScheme, isDonut, groupby, metric, colorPicker, showLegend, labelType, showLabels, legendPosition } =
+    formData as FormData<G, DK>;
   const data = queriesData[0].data as PieChartData<G, DK>[];
 
   return {

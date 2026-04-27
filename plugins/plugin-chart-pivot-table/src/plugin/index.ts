@@ -36,7 +36,7 @@ export default class PivotTableChartPlugin extends ChartPlugin {
       controlPanel,
       loadChart: () => import('../components/PivotTable'),
       metadata,
-      transformProps: (transformProps as unknown) as TransformProps,
+      transformProps: transformProps as unknown as TransformProps,
     });
   }
 }

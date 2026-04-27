@@ -19,9 +19,9 @@
 import React from 'react';
 import { ChartProps, supersetTheme, ThemeProvider } from '@superset-ui/core';
 import { BarChartSubType, ChartType } from '@superset-viz-plugins/plugin-chart-composed/src/components/types';
-import ComposedChart from '../../plugins/plugin-chart-composed/src/components/ComposedChart';
-import transformProps from '../../plugins/plugin-chart-composed/src/plugin/transformProps';
-import { barsHorizontalLegendTop } from '../../plugins/plugin-chart-composed/test/__mocks__/composedProps';
+import ComposedChart from '@superset-viz-plugins/plugin-chart-composed/src/components/ComposedChart';
+import transformProps from '@superset-viz-plugins/plugin-chart-composed/src/plugin/transformProps';
+import { barsHorizontalLegendTop } from '@superset-viz-plugins/plugin-chart-composed/test/__mocks__/composedProps';
 import { applyCommonLogic, commonConfig } from './utils';
 
 const commonProps = {
@@ -36,7 +36,7 @@ export default {
   ...commonConfig,
 };
 
-const DynamicLabelTemplate = args => {
+function DynamicLabelTemplate(args) {
   const chartSubType = args.chartSubType ?? BarChartSubType.default;
   if (chartSubType !== BarChartSubType.default && chartSubType !== BarChartSubType.stacked) {
     return (
@@ -51,14 +51,14 @@ const DynamicLabelTemplate = args => {
     <ThemeProvider theme={supersetTheme}>
       <ComposedChart
         data={
-          transformProps(({
+          transformProps({
             ...barsHorizontalLegendTop,
             formData: {
               ...barsHorizontalLegendTop.formData,
               useCategoryFormattingGroupBy0: args.useCategoryFormattingGroupBy0,
             },
             queriesData: args.queriesData,
-          } as unknown) as ChartProps).data
+          } as unknown as ChartProps).data
         }
         {...applyCommonLogic(args)}
         chartType={ChartType.barChart}
@@ -66,10 +66,10 @@ const DynamicLabelTemplate = args => {
       />
     </ThemeProvider>
   );
-};
+}
 
 export const DynamicLabels = DynamicLabelTemplate.bind({});
-const tProp = transformProps((barsHorizontalLegendTop as unknown) as ChartProps);
+const tProp = transformProps(barsHorizontalLegendTop as unknown as ChartProps);
 DynamicLabels.args = {
   ...commonProps,
   ...tProp,

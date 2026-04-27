@@ -29,18 +29,16 @@ export const LEGEND: LegendPayload[] = [
   { value: t('Total'), color: supersetTheme.colors.info.base, id: 'total', type: 'square' },
 ];
 
-export const renderLabel = (
-  formatter: Function,
-  domain: [AxisDomain, AxisDomain],
-  data: WaterfallChartData[],
-) => (item: { value: BarValue; index: number }) => {
-  let result = `${formatter(item.value?.[1] - item.value?.[0])}`;
-  // eslint-disable-next-line no-underscore-dangle
-  if (data[item.index].__TOTAL__ !== undefined) {
-    result = `${formatter(item.value?.[1] - item.value?.[0] + (domain[0] as number))}`;
-  }
-  return result;
-};
+export const renderLabel =
+  (formatter: (value: number) => string, domain: [AxisDomain, AxisDomain], data: WaterfallChartData[]) =>
+  (item: { value: BarValue; index: number }) => {
+    let result = `${formatter((item.value?.[1] ?? 0) - (item.value?.[0] ?? 0))}`;
+    // eslint-disable-next-line no-underscore-dangle
+    if (data[item.index].__TOTAL__ !== undefined) {
+      result = `${formatter((item.value?.[1] ?? 0) - (item.value?.[0] ?? 0) + (domain[0] as number))}`;
+    }
+    return result;
+  };
 
 export const BOTTOM_PADDING = 25;
 

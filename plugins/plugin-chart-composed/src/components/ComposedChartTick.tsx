@@ -76,7 +76,7 @@ const ComposedChartTick: FC<ComposedChartTickProps> = ({
     otherProps.width = actualWidth;
   }
   const tickWidth = width / visibleTicksCount;
-  const timeSeriesWidth = tickWidth ? times?.[index]?.long * tickWidth : undefined;
+  const timeSeriesWidth = tickWidth ? (times?.[index]?.long ?? 0) * tickWidth : undefined;
 
   return (
     <g transform={`translate(${x},${y})`} data-test-id={`tick-${text}`}>
@@ -105,7 +105,7 @@ const ComposedChartTick: FC<ComposedChartTickProps> = ({
           <Text
             className="composed-chart-tick-time-text"
             angle={angle}
-            dx={dx + (times?.[index]?.long * (tickWidth ?? 0)) / 2 - (tickWidth ?? 0) / 2}
+            dx={dx + ((times?.[index]?.long ?? 0) * (tickWidth ?? 0)) / 2 - (tickWidth ?? 0) / 2}
             dy={dy + 20}
             fontSize={12}
             verticalAnchor={verticalAnchor}

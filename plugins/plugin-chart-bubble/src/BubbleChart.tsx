@@ -174,11 +174,10 @@ const BubbleChart: FC<BubbleChartProps> = props => {
     dataForPlot = data;
   }
 
-  const currentData = useMemo(() => dataForPlot.filter(item => !disabledItems.includes(item[entity] as string)), [
-    dataForPlot,
-    disabledItems,
-    entity,
-  ]);
+  const currentData = useMemo(
+    () => dataForPlot.filter(item => !disabledItems.includes(item[entity] as string)),
+    [dataForPlot, disabledItems, entity],
+  );
   const legendIds: any[] = [];
   let legends: any[] = [];
   const groupingField = series || entity;

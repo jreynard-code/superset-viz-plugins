@@ -231,12 +231,12 @@ export type ChartLineItem = {
 };
 
 export type ChartBarItem = {
-  shape: ReactElement | Function;
+  shape: ReactElement | ((...args: unknown[]) => unknown);
   Element: React.ElementType;
   fill?: string;
   opacity?: number;
   stackId?: string | boolean;
-  onClick?: Function;
+  onClick?: (...args: unknown[]) => unknown;
 };
 
 type Shape = {
@@ -269,7 +269,7 @@ const getCustomScatterIcon = (
 ) => {
   const IconElement =
     // @ts-ignore
-    icons[layout === Layout.vertical ? ICONS_VERTICAL_MAP[chartSubType] ?? chartSubType : chartSubType];
+    icons[layout === Layout.vertical ? (ICONS_VERTICAL_MAP[chartSubType] ?? chartSubType) : chartSubType];
   return (props: Shape) => {
     const stickData =
       // @ts-ignore
@@ -287,15 +287,15 @@ const getCustomScatterIcon = (
       params.y = props.cy - ICON_SIZE;
       switch (stickData && stickyScatters?.[getMetricFromBreakdown(breakdown)]) {
         case StickyScatters.center: {
-          params.x = stickData?.x + stickData.width / 2;
+          params.x = (stickData?.x ?? 0) + stickData.width / 2;
           break;
         }
         case StickyScatters.end: {
-          params.x = stickData?.x + stickData.width + BARS_SPACE;
+          params.x = (stickData?.x ?? 0) + stickData.width + BARS_SPACE;
           break;
         }
         case StickyScatters.start: {
-          params.x = stickData?.x - BARS_SPACE;
+          params.x = (stickData?.x ?? 0) - BARS_SPACE;
           break;
         }
         default:
@@ -306,15 +306,15 @@ const getCustomScatterIcon = (
       params.x = props.cx - ICON_SIZE;
       switch (stickData && stickyScatters?.[getMetricFromBreakdown(breakdown)]) {
         case StickyScatters.center: {
-          params.y = stickData?.y + stickData.height / 2;
+          params.y = (stickData?.y ?? 0) + stickData.height / 2;
           break;
         }
         case StickyScatters.end: {
-          params.x = stickData?.y + stickData.height + BARS_SPACE;
+          params.x = (stickData?.y ?? 0) + stickData.height + BARS_SPACE;
           break;
         }
         case StickyScatters.start: {
-          params.y = stickData?.y - BARS_SPACE;
+          params.y = (stickData?.y ?? 0) - BARS_SPACE;
           break;
         }
         default:
@@ -353,7 +353,7 @@ export const getChartElement = (
         strokeWidth: 2,
         stroke: color,
         opacity: 0.8,
-        type: (chartSubType as unknown) as BarChartSubType,
+        type: chartSubType as unknown as BarChartSubType,
         connectNulls: true,
       };
       break;
@@ -364,7 +364,7 @@ export const getChartElement = (
         stroke: color,
         fill: color,
         opacity: 0.8,
-        type: (chartSubType as unknown) as LineChartSubType,
+        type: chartSubType as unknown as LineChartSubType,
       };
       break;
     case ChartType.scatterChart:
@@ -720,7 +720,7 @@ type ChartElementProps = {
   resultColors: JsonObject;
   stickyScatters?: JsonObject;
   barsUIPositions: JsonObject;
-  setBarsUIPositions: Function;
+  setBarsUIPositions: (...args: unknown[]) => unknown;
   barsUIPositionsRef: RefObject<JsonObject>;
   xAxisClientRect?: ClientRect;
   yAxisClientRect?: ClientRect;
@@ -806,7 +806,7 @@ export const renderChartElement = ({
   if (index !== lastNotExcludedBarIndex) {
     labelListExtraPropsWithTotal.content = emptyRender;
   }
-  let dataKey: string | Function = breakdown;
+  let dataKey: string | ((...args: unknown[]) => unknown) = breakdown;
   if (
     yColumnSortingType &&
     checkIsMetricStacked(isMainChartStacked, breakdown, excludedMetricsForStackedBars, includedMetricsForStackedBars)

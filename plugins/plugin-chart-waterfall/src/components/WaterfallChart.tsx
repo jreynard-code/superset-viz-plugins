@@ -61,8 +61,8 @@ export type WaterfallChartProps = {
   error?: string;
   numbersFormat?: string;
   height: number;
-  resetFilters?: Function;
-  onBarClick?: Function;
+  resetFilters?: (...args: unknown[]) => unknown;
+  onBarClick?: (...args: unknown[]) => unknown;
   width: number;
   data: WaterfallChartData[];
   showHorizontalGridLines: boolean;
@@ -203,7 +203,7 @@ const WaterfallChart: FC<WaterfallChartProps> = props => {
               <LabelList
                 dataKey={dataKey}
                 position="top"
-                content={(renderLabel(formatter, domain, dataWithDomain) as unknown) as ContentRenderer<LabelProps>}
+                content={renderLabel(formatter, domain, dataWithDomain) as unknown as ContentRenderer<LabelProps>}
               />
             </Bar>
           </BarChart>

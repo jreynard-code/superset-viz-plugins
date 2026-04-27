@@ -123,16 +123,17 @@ export const getUnits = <R extends string, C extends string, M extends string>(
     baseRowUnits = buildUnits<R, C, M, R>(item, rows, baseRowUnits);
   });
 
-  const { units: columnUnits, unitsSize: numberOfColumnsPerMetric, uiUnits: uiColumnUnits } = extractUnits<C>(
-    baseColumnUnits as BaseUnit<C>,
-    metrics,
-  );
+  const {
+    units: columnUnits,
+    unitsSize: numberOfColumnsPerMetric,
+    uiUnits: uiColumnUnits,
+  } = extractUnits<C>(baseColumnUnits as BaseUnit<C>, metrics);
 
-  const { units: rowUnits, unitsSize: numberOfRows, uiUnits: uiRowUnits } = extractUnits<R>(
-    baseRowUnits as BaseUnit<R>,
-    ['', ''],
-    true,
-  );
+  const {
+    units: rowUnits,
+    unitsSize: numberOfRows,
+    uiUnits: uiRowUnits,
+  } = extractUnits<R>(baseRowUnits as BaseUnit<R>, ['', ''], true);
 
   const oneDimensionColumns = buildOneDimensionUnits<C>(columns, columnUnits);
   const oneDimensionRows = buildOneDimensionUnits<R>(rows, rowUnits);

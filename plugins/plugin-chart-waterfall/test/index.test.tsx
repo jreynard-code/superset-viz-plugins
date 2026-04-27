@@ -85,7 +85,7 @@ describe('plugin-chart-waterfall', () => {
   });
 
   describe('processNumbers', () => {
-    const mockData = ([
+    const mockData = [
       { metric: [-0.1114, 0] },
       { metric: [-0.1115, 0] },
       { metric: [-0.1116, 0] },
@@ -100,11 +100,11 @@ describe('plugin-chart-waterfall', () => {
       { metric: [123, 0] },
       { metric: [123456, 0] },
       { metric: [123456789, 0] },
-      { metric: [1234567891011121314151617181920, 0] },
-    ] as unknown) as WaterfallChartData[];
+      { metric: [1.2345678910111213e30, 0] },
+    ] as unknown as WaterfallChartData[];
     it('non-adaptive', () => {
       expect(
-        processNumbers(([{ metric: [123, 456] }] as unknown) as WaterfallChartData[], 'metric', 'SOME_FORMAT', '3'),
+        processNumbers([{ metric: [123, 456] }] as unknown as WaterfallChartData[], 'metric', 'SOME_FORMAT', '3'),
       ).toEqual([{ metric: [123, 456] }]);
     });
     it('adaptive with digits for different numbers', () => {

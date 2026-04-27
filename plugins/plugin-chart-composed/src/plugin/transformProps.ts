@@ -116,7 +116,7 @@ export default function transformProps(chartProps: ChartProps) {
 
   const metrics = formData.metrics.map(({ label }) => label);
   formData.coloredBreakdowns?.forEach((cb, i) => {
-    colorSchemeByBreakdown[(cb.comparator as unknown) as string] = formData[`colorSchemeByBreakdown${i}`];
+    colorSchemeByBreakdown[cb.comparator as unknown as string] = formData[`colorSchemeByBreakdown${i}`];
   });
 
   if (formData.queryMode !== QueryMode.raw) {
@@ -252,7 +252,7 @@ export default function transformProps(chartProps: ChartProps) {
     },
     barChart: {
       stickyScatters,
-      minBarWidth: typeof formData.minBarWidth === undefined ? undefined : Number(formData.minBarWidth),
+      minBarWidth: typeof formData.minBarWidth === 'undefined' ? undefined : Number(formData.minBarWidth),
       hasTotals: formData.showTotals,
     },
     data: resultData,

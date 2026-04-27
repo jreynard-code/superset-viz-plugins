@@ -89,7 +89,7 @@ export const useCurrentData = (
                   excludedMetricsForStackedBars,
                   includedMetricsForStackedBars,
                 )
-                  ? (item[breakdown] as number) ?? 0
+                  ? ((item[breakdown] as number) ?? 0)
                   : 0),
               0,
             )

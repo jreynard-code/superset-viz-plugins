@@ -50,21 +50,21 @@ const ComposedNorm: FC<ComposedNormProp> = props => {
     fill = COLORS.minus;
   }
 
-  let resultWidth = xAxis.width / xAxis?.domain?.length - xAxis.width * 0.025;
+  let resultWidth = xAxis.width / (xAxis?.domain?.length ?? 1) - xAxis.width * 0.025;
   let resultHeight = NORM_SIZE;
   let resultX = x ?? 0;
   let valueX = resultX;
-  let resultY = xAxisClientRect?.height + xAxis.y + NORM_SPACE;
+  let resultY = (xAxisClientRect?.height ?? 0) + xAxis.y + NORM_SPACE;
   let valueY = resultY + NORM_SIZE / 2;
   let valueTransform = '';
   let transform = `translate(${-resultWidth / 2} 0)`;
-  let areaX = resultX - xAxis.width / xAxis?.domain?.length / 2 + xAxis.width / 2;
+  let areaX = resultX - xAxis.width / (xAxis?.domain?.length ?? 1) / 2 + xAxis.width / 2;
   let areaY = resultY + (3 * NORM_SIZE) / 2 - 2;
   let areaTransform = ``;
 
   if (layout === Layout.vertical) {
     resultWidth = NORM_SIZE;
-    resultHeight = yAxis.height / yAxis?.domain?.length - yAxis.height * 0.025;
+    resultHeight = yAxis.height / (yAxis?.domain?.length ?? 1) - yAxis.height * 0.025;
     resultX = NORM_SIZE;
     resultY = y ?? 0;
     valueX = -resultY;
@@ -72,7 +72,7 @@ const ComposedNorm: FC<ComposedNormProp> = props => {
     valueTransform = 'rotate(-90)';
     transform = `translate(0, ${-resultHeight / 2})`;
     areaY = NORM_SIZE / 2;
-    areaX = -resultY - yAxis.height / 2 + yAxis.height / yAxis?.domain?.length / 2;
+    areaX = -resultY - yAxis.height / 2 + yAxis.height / (yAxis?.domain?.length ?? 1) / 2;
     areaTransform = 'rotate(-90)';
   }
 

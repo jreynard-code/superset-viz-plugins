@@ -18,9 +18,9 @@
  */
 import React from 'react';
 import { ChartProps, supersetTheme, ThemeProvider } from '@superset-ui/core';
-import StatusChart from '../../plugins/plugin-chart-status/src/StatusChart';
-import transformProps from '../../plugins/plugin-chart-status/src/plugin/transformProps';
-import { statusesAndObjects } from '../../plugins/plugin-chart-status/test/__mocks__/statusProps';
+import StatusChart from '@superset-viz-plugins/plugin-chart-status/src/StatusChart';
+import transformProps from '@superset-viz-plugins/plugin-chart-status/src/plugin/transformProps';
+import { statusesAndObjects } from '@superset-viz-plugins/plugin-chart-status/test/__mocks__/statusProps';
 
 export default {
   title: 'Plugins/Status Chart',
@@ -36,17 +36,17 @@ export default {
   },
 };
 
-const Template = args => {
-  const { data } = transformProps(({ ...statusesAndObjects, queriesData: args.queriesData } as unknown) as ChartProps);
+function Template(args) {
+  const { data } = transformProps({ ...statusesAndObjects, queriesData: args.queriesData } as unknown as ChartProps);
   return (
     <ThemeProvider theme={supersetTheme}>
       <StatusChart {...args} statusColorsMap={{ [data[1]]: args.statusColor }} data={data} />
     </ThemeProvider>
   );
-};
+}
 
 export const Default = Template.bind({});
 Default.args = {
-  ...transformProps((statusesAndObjects as unknown) as ChartProps),
+  ...transformProps(statusesAndObjects as unknown as ChartProps),
   queriesData: statusesAndObjects.queriesData,
 };

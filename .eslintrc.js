@@ -17,9 +17,10 @@
  * under the License.
  */
 module.exports = {
-  extends: ['airbnb', 'prettier', 'prettier/react', 'plugin:react-hooks/recommended'],
-  parser: 'babel-eslint',
+  extends: ['airbnb', 'prettier', 'plugin:react-hooks/recommended'],
+  parser: '@babel/eslint-parser',
   parserOptions: {
+    requireConfigFile: false,
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
     },
@@ -68,8 +69,6 @@ module.exports = {
         'airbnb',
         'plugin:@typescript-eslint/recommended',
         'prettier',
-        'prettier/@typescript-eslint',
-        'prettier/react',
       ],
       plugins: ['@typescript-eslint/eslint-plugin', 'prettier', 'react'],
       rules: {
@@ -142,6 +141,12 @@ module.exports = {
         'react/require-default-props': 0,
         'react/static-property-placement': 0, // re-enable up for discussion
         'prettier/prettier': 'error',
+        'react/function-component-definition': [
+          'error',
+          { namedComponents: ['function-declaration', 'arrow-function'], unnamedComponents: 'arrow-function' },
+        ],
+        'no-restricted-exports': ['error', { restrictedNamedExports: ['then'] }],
+        'react/no-unstable-nested-components': ['error', { allowAsProps: true }],
       },
       settings: {
         'import/resolver': {

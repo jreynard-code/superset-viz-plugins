@@ -16,8 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { ChartProps, DataRecord } from '@superset-ui/core';
-import { Metric, SortingType } from '@superset-viz-plugins/plugin-chart-waterfall/src/plugin/utils';
+import { ChartProps } from '@superset-ui/core';
 import { LegendPosition } from '@superset-viz-plugins/plugin-chart-waterfall/src/types';
 
 export type QueryData = {

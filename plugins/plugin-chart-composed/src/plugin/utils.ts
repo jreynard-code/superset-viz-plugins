@@ -286,13 +286,15 @@ export const getQueryMode = (controls: ControlStateMapping): QueryMode => {
   return hasRawColumns ? QueryMode.raw : QueryMode.aggregate;
 };
 
-export const isQueryMode = (mode: QueryMode) => ({ controls }: ControlPanelsContainerProps) =>
-  getQueryMode(controls) === mode;
+export const isQueryMode =
+  (mode: QueryMode) =>
+  ({ controls }: ControlPanelsContainerProps) =>
+    getQueryMode(controls) === mode;
 export const isAggMode = isQueryMode(QueryMode.aggregate);
 export const isRawMode = isQueryMode(QueryMode.raw);
 
 export const getLabel = (formData: FormData, axisLabel?: string) => {
-  const moustacheRegexp = new RegExp(/{{(.*?)}}/g);
+  const moustacheRegexp = /{{(.*?)}}/g;
   if (axisLabel && moustacheRegexp.test(axisLabel)) {
     const filterName = axisLabel.replace(/[{}]/g, '').trim();
     let value = '';

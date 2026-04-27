@@ -80,8 +80,8 @@ export default function transformProps<R extends string = string, C extends stri
   let rows: R[] = (tempRows ?? []).map(row => datasource.verboseMap[row] ?? row) as R[];
   let columns: C[] = (tempColumns ?? []).map(column => datasource.verboseMap[column] ?? column) as C[];
   if (transpose) {
-    rows = ((tempColumns as unknown) as R[]) || [];
-    columns = ((tempRows as unknown) as C[]) || [];
+    rows = (tempColumns as unknown as R[]) || [];
+    columns = (tempRows as unknown as C[]) || [];
   }
 
   const {

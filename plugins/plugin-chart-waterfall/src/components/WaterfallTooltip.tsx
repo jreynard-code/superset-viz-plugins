@@ -20,7 +20,7 @@ import React, { FC } from 'react';
 import { styled, t } from '@superset-ui/core';
 
 type WaterfallTooltipProps = {
-  formatter: Function;
+  formatter: (value: number) => string;
   active?: boolean;
   payload?: {
     value: number[];
@@ -53,7 +53,8 @@ const Title = styled.div`
 
 const WaterfallTooltip: FC<WaterfallTooltipProps> = ({ active, payload, label, formatter }) => {
   if (active && payload && payload.length) {
-    const { lastPeriod, thisPeriod, change, changePercentage, thisPeriodValue, lastPeriodValue } = payload[0]?.payload;
+    const { lastPeriod, thisPeriod, change, changePercentage, thisPeriodValue, lastPeriodValue } =
+      payload[0]?.payload ?? {};
     return (
       <Wrapper>
         <Title>{label}</Title>

@@ -19,9 +19,12 @@
 import React from 'react';
 import { D3_FORMAT_OPTIONS } from '@superset-ui/chart-controls';
 import { supersetTheme, ThemeProvider } from '@superset-ui/core';
-import PivotTable from '../../plugins/plugin-chart-pivot-table/src/components/PivotTable';
-import transformProps from '../../plugins/plugin-chart-pivot-table/src/plugin/transformProps';
-import { singleRowCompact, withTotals } from '../../plugins/plugin-chart-pivot-table/test/__mocks__/pivotTableProps';
+import PivotTable from '@superset-viz-plugins/plugin-chart-pivot-table/src/components/PivotTable';
+import transformProps from '@superset-viz-plugins/plugin-chart-pivot-table/src/plugin/transformProps';
+import {
+  singleRowCompact,
+  withTotals,
+} from '@superset-viz-plugins/plugin-chart-pivot-table/test/__mocks__/pivotTableProps';
 import { extractTransformProps } from '../utils';
 
 export default {
@@ -52,16 +55,20 @@ export default {
   },
 };
 
-const DefaultTemplate = args => (
-  <ThemeProvider theme={supersetTheme}>
-    <PivotTable {...extractTransformProps({ args, props: withTotals, transformProps })} />
-  </ThemeProvider>
-);
-const CompactTemplate = args => (
-  <ThemeProvider theme={supersetTheme}>
-    <PivotTable {...extractTransformProps({ args, props: singleRowCompact, transformProps })} />
-  </ThemeProvider>
-);
+function DefaultTemplate(args) {
+  return (
+    <ThemeProvider theme={supersetTheme}>
+      <PivotTable {...extractTransformProps({ args, props: withTotals, transformProps })} />
+    </ThemeProvider>
+  );
+}
+function CompactTemplate(args) {
+  return (
+    <ThemeProvider theme={supersetTheme}>
+      <PivotTable {...extractTransformProps({ args, props: singleRowCompact, transformProps })} />
+    </ThemeProvider>
+  );
+}
 
 export const Default = DefaultTemplate.bind({});
 Default.args = {

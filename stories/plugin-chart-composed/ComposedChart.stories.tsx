@@ -18,22 +18,22 @@
  */
 import React from 'react';
 import { ChartProps, supersetTheme, ThemeProvider } from '@superset-ui/core';
-import ComposedChart from '../../plugins/plugin-chart-composed/src/components/ComposedChart';
+import ComposedChart from '@superset-viz-plugins/plugin-chart-composed/src/components/ComposedChart';
 import {
   BarChartSubType,
   ChartType,
   LineChartSubType,
   NormChartSubType,
   ScatterChartSubType,
-} from '../../plugins/plugin-chart-composed/src/components/types';
-import transformProps from '../../plugins/plugin-chart-composed/src/plugin/transformProps';
+} from '@superset-viz-plugins/plugin-chart-composed/src/components/types';
+import transformProps from '@superset-viz-plugins/plugin-chart-composed/src/plugin/transformProps';
 import {
   allChatsLegendBottomBreakdowns,
   barsHorizontalLegendTop,
   bubbleHorizontalLegendTop,
   normHorizontalLegendTop,
   timeSeries,
-} from '../../plugins/plugin-chart-composed/test/__mocks__/composedProps';
+} from '@superset-viz-plugins/plugin-chart-composed/test/__mocks__/composedProps';
 import { applyCommonLogic, commonConfig } from './utils';
 
 export default {
@@ -48,7 +48,7 @@ const commonProps = {
   useCategoryFormattingGroupBy0: true,
 };
 
-const BarsTemplate = args => {
+function BarsTemplate(args) {
   const chartSubType = args.chartSubType ?? BarChartSubType.default;
   if (chartSubType !== BarChartSubType.default && chartSubType !== BarChartSubType.stacked) {
     return (
@@ -63,14 +63,14 @@ const BarsTemplate = args => {
     <ThemeProvider theme={supersetTheme}>
       <ComposedChart
         data={
-          transformProps(({
+          transformProps({
             ...barsHorizontalLegendTop,
             formData: {
               ...barsHorizontalLegendTop.formData,
               useCategoryFormattingGroupBy0: args.useCategoryFormattingGroupBy0,
             },
             queriesData: args.queriesData,
-          } as unknown) as ChartProps).data
+          } as unknown as ChartProps).data
         }
         {...applyCommonLogic(args)}
         chartType={ChartType.barChart}
@@ -78,9 +78,9 @@ const BarsTemplate = args => {
       />
     </ThemeProvider>
   );
-};
+}
 
-const NormTemplate = args => {
+function NormTemplate(args) {
   const chartSubType = args.chartSubType ?? NormChartSubType.default;
   if (chartSubType !== NormChartSubType.default) {
     return (
@@ -94,14 +94,14 @@ const NormTemplate = args => {
     <ThemeProvider theme={supersetTheme}>
       <ComposedChart
         data={
-          transformProps(({
+          transformProps({
             ...normHorizontalLegendTop,
             formData: {
               ...normHorizontalLegendTop.formData,
               useCategoryFormattingGroupBy0: args.useCategoryFormattingGroupBy0,
             },
             queriesData: args.queriesData,
-          } as unknown) as ChartProps).data
+          } as unknown as ChartProps).data
         }
         {...applyCommonLogic(args)}
         chartType={ChartType.normChart}
@@ -109,9 +109,9 @@ const NormTemplate = args => {
       />
     </ThemeProvider>
   );
-};
+}
 
-const TimeSeriesTemplate = args => {
+function TimeSeriesTemplate(args) {
   const chartSubType = args.chartSubType ?? BarChartSubType.default;
   if (chartSubType !== BarChartSubType.default && chartSubType !== BarChartSubType.stacked) {
     return (
@@ -126,14 +126,14 @@ const TimeSeriesTemplate = args => {
     <ThemeProvider theme={supersetTheme}>
       <ComposedChart
         data={
-          transformProps(({
+          transformProps({
             ...timeSeries,
             formData: {
               ...timeSeries.formData,
               useCategoryFormattingGroupBy0: false,
             },
             queriesData: args.queriesData,
-          } as unknown) as ChartProps).data
+          } as unknown as ChartProps).data
         }
         {...applyCommonLogic(args)}
         chartType={ChartType.barChart}
@@ -142,9 +142,9 @@ const TimeSeriesTemplate = args => {
       />
     </ThemeProvider>
   );
-};
+}
 
-const LinesTemplate = args => {
+function LinesTemplate(args) {
   const chartSubType = args.chartSubType ?? LineChartSubType.basis;
   if (
     chartSubType !== LineChartSubType.basis &&
@@ -168,14 +168,14 @@ const LinesTemplate = args => {
     <ThemeProvider theme={supersetTheme}>
       <ComposedChart
         data={
-          transformProps(({
+          transformProps({
             ...barsHorizontalLegendTop,
             formData: {
               ...barsHorizontalLegendTop.formData,
               useCategoryFormattingGroupBy0: args.useCategoryFormattingGroupBy0,
             },
             queriesData: args.queriesData,
-          } as unknown) as ChartProps).data
+          } as unknown as ChartProps).data
         }
         {...applyCommonLogic(args)}
         chartType={ChartType.lineChart}
@@ -184,9 +184,9 @@ const LinesTemplate = args => {
       />
     </ThemeProvider>
   );
-};
+}
 
-const AreaTemplate = args => {
+function AreaTemplate(args) {
   const chartSubType = args.chartSubType ?? LineChartSubType.basis;
   if (
     chartSubType !== LineChartSubType.basis &&
@@ -210,14 +210,14 @@ const AreaTemplate = args => {
     <ThemeProvider theme={supersetTheme}>
       <ComposedChart
         data={
-          transformProps(({
+          transformProps({
             ...barsHorizontalLegendTop,
             formData: {
               ...barsHorizontalLegendTop.formData,
               useCategoryFormattingGroupBy0: args.useCategoryFormattingGroupBy0,
             },
             queriesData: args.queriesData,
-          } as unknown) as ChartProps).data
+          } as unknown as ChartProps).data
         }
         {...applyCommonLogic(args)}
         chartType={ChartType.areaChart}
@@ -226,9 +226,9 @@ const AreaTemplate = args => {
       />
     </ThemeProvider>
   );
-};
+}
 
-const ScatterTemplate = args => {
+function ScatterTemplate(args) {
   const chartSubType = args.chartSubType ?? ScatterChartSubType.circle;
   if (
     chartSubType !== ScatterChartSubType.circle &&
@@ -254,14 +254,14 @@ const ScatterTemplate = args => {
     <ThemeProvider theme={supersetTheme}>
       <ComposedChart
         data={
-          transformProps(({
+          transformProps({
             ...barsHorizontalLegendTop,
             formData: {
               ...barsHorizontalLegendTop.formData,
               useCategoryFormattingGroupBy0: args.useCategoryFormattingGroupBy0,
             },
             queriesData: args.queriesData,
-          } as unknown) as ChartProps).data
+          } as unknown as ChartProps).data
         }
         {...applyCommonLogic(args)}
         chartType={ChartType.scatterChart}
@@ -270,9 +270,9 @@ const ScatterTemplate = args => {
       />
     </ThemeProvider>
   );
-};
+}
 
-const BubbleTemplate = args => {
+function BubbleTemplate(args) {
   const chartSubType = args.chartSubType ?? ScatterChartSubType.circle;
   if (
     chartSubType !== ScatterChartSubType.circle &&
@@ -294,14 +294,14 @@ const BubbleTemplate = args => {
     <ThemeProvider theme={supersetTheme}>
       <ComposedChart
         data={
-          transformProps(({
+          transformProps({
             ...bubbleHorizontalLegendTop,
             formData: {
               ...bubbleHorizontalLegendTop.formData,
               useCategoryFormattingGroupBy0: args.useCategoryFormattingGroupBy0,
             },
             queriesData: args.queriesData,
-          } as unknown) as ChartProps).data
+          } as unknown as ChartProps).data
         }
         {...applyCommonLogic(args)}
         chartType={ChartType.bubbleChart}
@@ -310,30 +310,32 @@ const BubbleTemplate = args => {
       />
     </ThemeProvider>
   );
-};
+}
 
-const AllTypesTemplate = args => (
-  <ThemeProvider theme={supersetTheme}>
-    <ComposedChart
-      data={
-        transformProps(({
-          ...allChatsLegendBottomBreakdowns,
-          formData: {
-            ...allChatsLegendBottomBreakdowns.formData,
-            useCategoryFormattingGroupBy0: args.useCategoryFormattingGroupBy0,
-          },
-          queriesData: args.queriesData,
-        } as unknown) as ChartProps).data
-      }
-      {...applyCommonLogic(args)}
-    />
-  </ThemeProvider>
-);
+function AllTypesTemplate(args) {
+  return (
+    <ThemeProvider theme={supersetTheme}>
+      <ComposedChart
+        data={
+          transformProps({
+            ...allChatsLegendBottomBreakdowns,
+            formData: {
+              ...allChatsLegendBottomBreakdowns.formData,
+              useCategoryFormattingGroupBy0: args.useCategoryFormattingGroupBy0,
+            },
+            queriesData: args.queriesData,
+          } as unknown as ChartProps).data
+        }
+        {...applyCommonLogic(args)}
+      />
+    </ThemeProvider>
+  );
+}
 
 export const Bars = BarsTemplate.bind({});
 Bars.args = {
   ...commonProps,
-  ...transformProps(({ ...barsHorizontalLegendTop } as unknown) as ChartProps),
+  ...transformProps({ ...barsHorizontalLegendTop } as unknown as ChartProps),
   queriesData: barsHorizontalLegendTop.queriesData,
   chartSubType: BarChartSubType.default,
 };
@@ -341,7 +343,7 @@ Bars.args = {
 export const Norm = NormTemplate.bind({});
 Norm.args = {
   ...commonProps,
-  ...transformProps(({ ...normHorizontalLegendTop } as unknown) as ChartProps),
+  ...transformProps({ ...normHorizontalLegendTop } as unknown as ChartProps),
   queriesData: normHorizontalLegendTop.queriesData,
   chartSubType: NormChartSubType.default,
 };
@@ -349,7 +351,7 @@ Norm.args = {
 export const TimeSeries = TimeSeriesTemplate.bind({});
 TimeSeries.args = {
   ...commonProps,
-  ...transformProps((timeSeries as unknown) as ChartProps),
+  ...transformProps(timeSeries as unknown as ChartProps),
   queriesData: timeSeries.queriesData,
   chartSubType: BarChartSubType.stacked,
   xAxisTickLabelAngle: '0',
@@ -358,7 +360,7 @@ TimeSeries.args = {
 export const Lines = LinesTemplate.bind({});
 Lines.args = {
   ...commonProps,
-  ...transformProps(({ ...barsHorizontalLegendTop } as unknown) as ChartProps),
+  ...transformProps({ ...barsHorizontalLegendTop } as unknown as ChartProps),
   queriesData: barsHorizontalLegendTop.queriesData,
   chartSubType: LineChartSubType.basis,
   chartType: ChartType.lineChart,
@@ -368,7 +370,7 @@ Lines.args = {
 export const Area = AreaTemplate.bind({});
 Area.args = {
   ...commonProps,
-  ...transformProps(({ ...barsHorizontalLegendTop } as unknown) as ChartProps),
+  ...transformProps({ ...barsHorizontalLegendTop } as unknown as ChartProps),
   queriesData: barsHorizontalLegendTop.queriesData,
   chartType: ChartType.areaChart,
   chartSubType: LineChartSubType.basis,
@@ -377,7 +379,7 @@ Area.args = {
 export const Scatter = ScatterTemplate.bind({});
 Scatter.args = {
   ...commonProps,
-  ...transformProps(({ ...barsHorizontalLegendTop } as unknown) as ChartProps),
+  ...transformProps({ ...barsHorizontalLegendTop } as unknown as ChartProps),
   queriesData: barsHorizontalLegendTop.queriesData,
   chartType: ChartType.scatterChart,
   chartSubType: ScatterChartSubType.circle,
@@ -386,7 +388,7 @@ Scatter.args = {
 export const Bubble = BubbleTemplate.bind({});
 Bubble.args = {
   ...commonProps,
-  ...transformProps(({ ...bubbleHorizontalLegendTop } as unknown) as ChartProps),
+  ...transformProps({ ...bubbleHorizontalLegendTop } as unknown as ChartProps),
   queriesData: bubbleHorizontalLegendTop.queriesData,
   chartType: ChartType.bubbleChart,
   chartSubType: ScatterChartSubType.circle,
@@ -395,6 +397,6 @@ Bubble.args = {
 export const AllTypes = AllTypesTemplate.bind({});
 AllTypes.args = {
   ...commonProps,
-  ...transformProps(({ ...allChatsLegendBottomBreakdowns } as unknown) as ChartProps),
+  ...transformProps({ ...allChatsLegendBottomBreakdowns } as unknown as ChartProps),
   queriesData: allChatsLegendBottomBreakdowns.queriesData,
 };

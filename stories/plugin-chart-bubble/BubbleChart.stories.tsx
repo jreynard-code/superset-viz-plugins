@@ -19,9 +19,9 @@
 import React from 'react';
 import { D3_FORMAT_OPTIONS } from '@superset-ui/chart-controls';
 import { supersetTheme, ThemeProvider } from '@superset-ui/core';
-import BubbleChart from '../../plugins/plugin-chart-bubble/src/BubbleChart';
-import transformProps from '../../plugins/plugin-chart-bubble/src/plugin/transformProps';
-import { bubbleProps } from '../../plugins/plugin-chart-bubble/test/__mocks__/bubbleProps';
+import BubbleChart from '@superset-viz-plugins/plugin-chart-bubble/src/BubbleChart';
+import transformProps from '@superset-viz-plugins/plugin-chart-bubble/src/plugin/transformProps';
+import { bubbleProps } from '@superset-viz-plugins/plugin-chart-bubble/test/__mocks__/bubbleProps';
 import { extractTransformProps } from '../utils';
 
 export default {
@@ -49,17 +49,21 @@ export default {
   },
 };
 
-const Template = args => (
-  <ThemeProvider theme={supersetTheme}>
-    <BubbleChart {...extractTransformProps({ args, props: bubbleProps, transformProps })} />
-  </ThemeProvider>
-);
+function Template(args) {
+  return (
+    <ThemeProvider theme={supersetTheme}>
+      <BubbleChart {...extractTransformProps({ args, props: bubbleProps, transformProps })} />
+    </ThemeProvider>
+  );
+}
 
-const WithoutSeriesBubble = args => (
-  <ThemeProvider theme={supersetTheme}>
-    <BubbleChart {...extractTransformProps({ args, props: bubbleProps, transformProps })} />
-  </ThemeProvider>
-);
+function WithoutSeriesBubble(args) {
+  return (
+    <ThemeProvider theme={supersetTheme}>
+      <BubbleChart {...extractTransformProps({ args, props: bubbleProps, transformProps })} />
+    </ThemeProvider>
+  );
+}
 
 const logScaleBubble = args => (
   <ThemeProvider theme={supersetTheme}>

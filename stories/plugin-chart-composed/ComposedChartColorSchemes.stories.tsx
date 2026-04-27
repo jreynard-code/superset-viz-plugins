@@ -18,10 +18,10 @@
  */
 import React from 'react';
 import { ChartProps, getCategoricalSchemeRegistry, supersetTheme, ThemeProvider } from '@superset-ui/core';
-import ComposedChart from '../../plugins/plugin-chart-composed/src/components/ComposedChart';
-import { BarChartSubType, ChartType } from '../../plugins/plugin-chart-composed/src/components/types';
-import transformProps from '../../plugins/plugin-chart-composed/src/plugin/transformProps';
-import { metricsAndBreakdownBars } from '../../plugins/plugin-chart-composed/test/__mocks__/composedProps';
+import ComposedChart from '@superset-viz-plugins/plugin-chart-composed/src/components/ComposedChart';
+import { BarChartSubType, ChartType } from '@superset-viz-plugins/plugin-chart-composed/src/components/types';
+import transformProps from '@superset-viz-plugins/plugin-chart-composed/src/plugin/transformProps';
+import { metricsAndBreakdownBars } from '@superset-viz-plugins/plugin-chart-composed/test/__mocks__/composedProps';
 import { applyCommonLogic, commonConfig } from './utils';
 
 const GREY_COLOR_SCHEME = 'GREY_COLOR_SCHEME';
@@ -54,7 +54,7 @@ export default {
   ...commonConfig,
 };
 
-const SortedBarsTemplate = args => {
+function SortedBarsTemplate(args) {
   if (args.chartSubType !== BarChartSubType.default && args.chartSubType !== BarChartSubType.stacked) {
     return (
       <>
@@ -74,13 +74,13 @@ const SortedBarsTemplate = args => {
           })}
           chartType={ChartType.barChart}
           data={
-            transformProps(({
+            transformProps({
               ...metricsAndBreakdownBars,
               formData: {
                 ...metricsAndBreakdownBars.formData,
               },
               queriesData: args.queriesData,
-            } as unknown) as ChartProps).data
+            } as unknown as ChartProps).data
           }
         />
         <ComposedChart
@@ -90,13 +90,13 @@ const SortedBarsTemplate = args => {
           })}
           chartType={ChartType.barChart}
           data={
-            transformProps(({
+            transformProps({
               ...metricsAndBreakdownBars,
               formData: {
                 ...metricsAndBreakdownBars.formData,
               },
               queriesData: args.queriesData,
-            } as unknown) as ChartProps).data
+            } as unknown as ChartProps).data
           }
           colorSchemes={{
             metric: {
@@ -114,13 +114,13 @@ const SortedBarsTemplate = args => {
           })}
           chartType={ChartType.barChart}
           data={
-            transformProps(({
+            transformProps({
               ...metricsAndBreakdownBars,
               formData: {
                 ...metricsAndBreakdownBars.formData,
               },
               queriesData: args.queriesData,
-            } as unknown) as ChartProps).data
+            } as unknown as ChartProps).data
           }
           colorSchemes={{
             metric: {},
@@ -133,11 +133,11 @@ const SortedBarsTemplate = args => {
       </div>
     </ThemeProvider>
   );
-};
+}
 
 export const ColorSchemes = SortedBarsTemplate.bind({});
 ColorSchemes.args = {
-  ...transformProps(({ ...metricsAndBreakdownBars } as unknown) as ChartProps),
+  ...transformProps({ ...metricsAndBreakdownBars } as unknown as ChartProps),
   ...commonProps,
   queriesData: metricsAndBreakdownBars.queriesData,
   chartSubType: BarChartSubType.default,
